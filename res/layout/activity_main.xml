@@ -1,8 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.martin.gamekeeper"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.martin.gamekeeper.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    android:orientation="vertical" >
 
+    <com.martin.gamekeeper.DayCard
+        custom:candidate1Name="Fritz A."
+        custom:candidate1Score="2"
+        custom:candidate2Name="bigdisch"
+        custom:candidate2Score="3"
+        custom:day="0" />
+
+</LinearLayout>
