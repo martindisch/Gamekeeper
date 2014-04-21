@@ -1,17 +1,17 @@
 package com.martin.gamekeeper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public class DbManager {
 	
-	private Context context;
 	private SharedPreferences sp;
 	private SharedPreferences.Editor editor;
 	
+	@SuppressLint("CommitPrefEdits")
 	public DbManager(Context context) {
 		super();
-		this.context = context;
 		sp = context.getSharedPreferences("Gamedata", Context.MODE_PRIVATE);
 		editor = sp.edit();
 	}
