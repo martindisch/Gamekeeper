@@ -38,6 +38,39 @@ public class DayCard extends LinearLayout {
 			background = getResources().getDrawable(R.drawable.card_background_red);
 			break;
 		}
+		
+		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
+		a.recycle();
+	}
+	
+	@SuppressWarnings("deprecation")
+	public DayCard(Context context, int day, String score) {
+		super(context);
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater.inflate(R.layout.card, this, true);
+		String[] days = context.getResources().getStringArray(R.array.days);
+		((TextView) findViewById(R.id.tvDay)).setText(days[day]);
+		((TextView) findViewById(R.id.tvScore)).setText(score);
+		
+		Drawable background = null;
+		switch (day) {
+		case 0:
+			background = getResources().getDrawable(R.drawable.card_background_blue);
+			break;
+		case 1:
+			background = getResources().getDrawable(R.drawable.card_background_purple);
+			break;
+		case 2:
+			background = getResources().getDrawable(R.drawable.card_background_green);
+			break;
+		case 3:
+			background = getResources().getDrawable(R.drawable.card_background_orange);
+			break;
+		case 4:
+			background = getResources().getDrawable(R.drawable.card_background_red);
+			break;
+		}
+		
 		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
 	}
 
