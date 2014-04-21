@@ -23,35 +23,33 @@
             android:contentDescription="@string/image_descript"
             android:padding="1dp"
             android:src="@drawable/unknown" />
-        
+
         <ImageButton
-            android:contentDescription="@string/ib_descript_plus"
-            android:id="@+id/bP1Inc"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/plus"
-            android:alpha="0.2"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/ibP1Inc"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:paddingTop="@dimen/card_padding"
-            android:visibility="gone"/>
-        <ImageButton
-            android:visibility="gone"
-            android:alpha="0.1"
-            android:contentDescription="@string/ib_descript_minus"
-            android:id="@+id/bP1Dec"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/minus"
-            android:scaleType="centerInside"
             android:adjustViewBounds="true"
+            android:alpha="0.2"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/ib_descript_plus"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus"
+            android:visibility="invisible" />
+
+        <ImageButton
+            android:id="@+id/ibP1Dec"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="@dimen/card_padding"/>
+            android:adjustViewBounds="true"
+            android:alpha="0.1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/ib_descript_minus"
+            android:scaleType="centerInside"
+            android:src="@drawable/minus"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -93,35 +91,34 @@
             android:contentDescription="@string/image_descript"
             android:padding="1dp"
             android:src="@drawable/unknown" />
-        
+
         <ImageButton
-            android:contentDescription="@string/ib_descript_plus"
-            android:id="@+id/bP2Inc"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/plus"
-            android:alpha="0.2"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
+            android:id="@+id/ibP2Inc"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:paddingTop="@dimen/card_padding"
-            android:visibility="gone"/>
-        <ImageButton
-            android:alpha="0.1"
-            android:contentDescription="@string/ib_descript_minus"
-            android:id="@+id/bP2Dec"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/minus"
-            android:scaleType="centerInside"
             android:adjustViewBounds="true"
+            android:alpha="0.2"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/ib_descript_plus"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/ibP2Dec"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="@dimen/card_padding"
-            android:visibility="gone"/>
+            android:adjustViewBounds="true"
+            android:alpha="0.1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/ib_descript_minus"
+            android:scaleType="centerInside"
+            android:src="@drawable/minus"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>
