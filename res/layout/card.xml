@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llCardRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_margin"
     android:layout_marginLeft="@dimen/card_margin"
     android:layout_marginRight="@dimen/card_margin"
-    android:background="@drawable/card_background"
     android:orientation="horizontal"
     android:weightSum="7" >
 
@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:adjustViewBounds="true"
-        android:padding="@dimen/card_padding"
+        android:background="#d3d3d3"
+        android:contentDescription="@string/image_descript"
+        android:padding="1dp"
         android:src="@drawable/unknown" />
 
     <RelativeLayout
@@ -29,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:paddingTop="@dimen/card_padding"
-            android:text="Mo"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -39,8 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="@dimen/card_padding"
-            android:text="5 : 3"
+            android:paddingBottom="10dp"
             android:textSize="45sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -51,7 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:adjustViewBounds="true"
-        android:padding="@dimen/card_padding"
+        android:background="#d3d3d3"
+        android:contentDescription="@string/image_descript"
+        android:padding="1dp"
         android:src="@drawable/unknown" />
 
 </LinearLayout>

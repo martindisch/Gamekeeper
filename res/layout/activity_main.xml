@@ -1,15 +1,59 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.martin.gamekeeper"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <com.martin.gamekeeper.DayCard
-        custom:candidate1Name="Fritz A."
-        custom:candidate1Score="2"
-        custom:candidate2Name="bigdisch"
-        custom:candidate2Score="3"
-        custom:day="0" />
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/card_margin" >
 
-</LinearLayout>
+        <com.martin.gamekeeper.DayCard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:candidate1Name="Fritz A."
+            custom:candidate1Score="2"
+            custom:candidate2Name="bigdisch"
+            custom:candidate2Score="3"
+            custom:day="0" />
+
+        <com.martin.gamekeeper.DayCard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:candidate1Name="Fritz A."
+            custom:candidate1Score="2"
+            custom:candidate2Name="bigdisch"
+            custom:candidate2Score="3"
+            custom:day="1" />
+
+        <com.martin.gamekeeper.DayCard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:candidate1Name="Fritz A."
+            custom:candidate1Score="2"
+            custom:candidate2Name="bigdisch"
+            custom:candidate2Score="3"
+            custom:day="2" />
+
+        <com.martin.gamekeeper.DayCard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:candidate1Name="Fritz A."
+            custom:candidate1Score="2"
+            custom:candidate2Name="bigdisch"
+            custom:candidate2Score="3"
+            custom:day="3" />
+
+        <com.martin.gamekeeper.DayCard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:candidate1Name="Fritz A."
+            custom:candidate1Score="2"
+            custom:candidate2Name="bigdisch"
+            custom:candidate2Score="3"
+            custom:day="4" />
+    </LinearLayout>
+
+</ScrollView>
