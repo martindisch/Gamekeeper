@@ -3,6 +3,7 @@ package com.martin.gamekeeper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,15 +59,19 @@ public class DayCard extends LinearLayout implements OnClickListener {
 		if (editMode) {
 			ImageButton current;
 			current = (ImageButton) findViewById(R.id.ibP1Inc);
+			current.setColorFilter(getResources().getColor(android.R.color.darker_gray), Mode.SRC_OUT);
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 			current = (ImageButton) findViewById(R.id.ibP2Inc);
+			current.setColorFilter(getResources().getColor(android.R.color.darker_gray), Mode.SRC_OUT);
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 			current = (ImageButton) findViewById(R.id.ibP1Dec);
+			current.setColorFilter(getResources().getColor(android.R.color.darker_gray), Mode.SRC_OUT);
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 			current = (ImageButton) findViewById(R.id.ibP2Dec);
+			current.setColorFilter(getResources().getColor(android.R.color.darker_gray), Mode.SRC_OUT);
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 		}
