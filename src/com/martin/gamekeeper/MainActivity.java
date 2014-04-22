@@ -28,23 +28,35 @@ public class MainActivity extends Activity {
 	}
 
 	private void displayDays() {
+		long time = System.currentTimeMillis();
+		
 		setContentView(R.layout.activity_main);
+		Log.e("FFF", "Setting content view: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		LinearLayout root = (LinearLayout) findViewById(R.id.container);
 		DbManager db = new DbManager(this);
+		Log.e("FFF", "Getting linear layout and dbManager: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		for (int i = 0; i < 5; i++) {
 			root.addView(new DayCard(this, i, db.getResultForDay(i), editMode));
 		}
+		Log.e("FFF", "Adding all children: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		// Get Uri's
 		Uri p1Uri = db.getPicUri(1);
 		Uri p2Uri = db.getPicUri(2);
+		Log.e("FFF", "Getting Uri's: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		// Get size of imageviews
 		int[] size = ((DayCard) root.getChildAt(0)).getSize();
 		int width = size[0];
 		int height = size[1];
+		Log.e("FFF", "Getting size of imageviews: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		// Fill bitmaps
 		Bitmap pic1 = null, pic2 = null;
@@ -54,14 +66,17 @@ public class MainActivity extends Activity {
 		if (!p2Uri.toString().contentEquals("null")) {
 			pic2 = Bitmapper.decodeSampledBitmap(this, p2Uri, width, height);
 		}
+		Log.e("FFF", "Getting the 2 bitmaps: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 
 		// If at least one has a custom picture, update
 		if (pic1 != null || pic2 != null) {
-			Log.e("FFF", "Adding custom images");
 			for (int i = 0; i < 5; i++) {
 				((DayCard) root.getChildAt(i)).setProfiles(pic1, pic2);
 			}
 		}
+		Log.e("FFF", "Applying bitmaps to all children: " + (System.currentTimeMillis() - time) + "ms");
+		time = System.currentTimeMillis();
 	}
 
 	@Override
