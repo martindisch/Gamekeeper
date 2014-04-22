@@ -2,12 +2,15 @@ package com.martin.gamekeeper;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ public class DayCard extends LinearLayout implements OnClickListener {
 	private DbManager db;
 	private int day;
 	private TextView tvScore;
+	private ImageView pic1, pic2;
 
 	@SuppressWarnings("deprecation")
 	public DayCard(Context context, AttributeSet attrs) {
@@ -83,6 +87,28 @@ public class DayCard extends LinearLayout implements OnClickListener {
 		}
 
 		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
+		
+		pic1 = (ImageView) findViewById(R.id.ivC1);
+		pic2 = (ImageView) findViewById(R.id.ivC2);
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Bitmap b1 = null, b2 = null;
+				if (db.picAvailable(1)) {
+					b1 = db.getProfilePic(1);
+					pic1.setImageBitmap(b1);
+				}
+				if (db.picAvailable(2)) {
+					b2 = db.getProfilePic(2);
+					pic2.setImageBitmap(b2);
+				}
+	
+			}
+		});
+		t.start();
+		
+		
 
 		// Prepare edit buttons
 		if (editMode) {

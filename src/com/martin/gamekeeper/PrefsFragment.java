@@ -1,7 +1,10 @@
 package com.martin.gamekeeper;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -9,14 +12,19 @@ import android.preference.PreferenceFragment;
 
 public class PrefsFragment extends PreferenceFragment {
 
+	private DbManager db;
+	private int player;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
+		db = new DbManager(getActivity());
+
 		addPreferencesFromResource(R.xml.settings);
-		
+
 		((Preference) findPreference("p1pic")).setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				getPic(1);
@@ -24,7 +32,7 @@ public class PrefsFragment extends PreferenceFragment {
 			}
 		});
 		((Preference) findPreference("p2pic")).setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				getPic(2);
@@ -32,17 +40,16 @@ public class PrefsFragment extends PreferenceFragment {
 			}
 		});
 		((Preference) findPreference("reset")).setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.reset_message);
 				builder.setTitle(R.string.reset_title);
 				builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						DbManager db = new DbManager(getActivity());
 						db.resetAll();
 					}
 				});
@@ -51,10 +58,34 @@ public class PrefsFragment extends PreferenceFragment {
 				return true;
 			}
 		});
-		
+
 	}
-	
+
 	private void getPic(int i) {
-		
+		player = i;
+		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		intent.setType("image/*");
+		startActivityForResult(intent, 1);
+		/*if (Build.VERSION.SDK_INT < 19) {
+			intent = new Intent();
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			intent.setType("image/*");
+			startActivityForResult(intent, 1);
+		} else {
+			intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+			intent.addCategory(Intent.CATEGORY_OPENABLE);
+			intent.setType("image/*");
+			startActivityForResult(intent, 1);
+		}*/
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+			db.setProfilePic(player, data.getData());
+		}
+	}
+
 }
