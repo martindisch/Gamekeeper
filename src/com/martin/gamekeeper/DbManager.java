@@ -56,6 +56,8 @@ public class DbManager {
 		available = false;
 		try {
 			Uri imageUri = Uri.parse(sp.getString(player + "pic", "null"));
+			
+			// Potentially critical when other threads are trying to access the bitmap
 			if (bitmap != null) {
 				bitmap.recycle();
 			}
