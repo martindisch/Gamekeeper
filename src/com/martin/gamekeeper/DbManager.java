@@ -44,7 +44,7 @@ public class DbManager {
 	}
 
 	public Uri getPicUri(int player) {
-			return Uri.parse(sp.getString(player + "pic", "null"));
+		return Uri.parse(sp.getString(player + "pic", "null"));
 	}
 
 	private void callUpdate() {

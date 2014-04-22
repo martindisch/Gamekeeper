@@ -12,7 +12,7 @@ public class PrefsActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

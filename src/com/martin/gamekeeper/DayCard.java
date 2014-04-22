@@ -1,10 +1,9 @@
 package com.martin.gamekeeper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,45 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+@SuppressLint("ViewConstructor")
 public class DayCard extends LinearLayout implements OnClickListener {
 
 	private DbManager db;
 	private int day;
 	private TextView tvScore;
 	private ImageView pic1, pic2;
-
-	@SuppressWarnings("deprecation")
-	public DayCard(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DayCard, 0, 0);
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.card, this, true);
-		String[] days = context.getResources().getStringArray(R.array.days);
-		((TextView) findViewById(R.id.tvDay)).setText(days[a.getInt(R.styleable.DayCard_day, 0)]);
-		((TextView) findViewById(R.id.tvScore)).setText(a.getString(R.styleable.DayCard_candidate1Score) + " : " + a.getString(R.styleable.DayCard_candidate2Score));
-
-		Drawable background = null;
-		switch (a.getInt(R.styleable.DayCard_day, 0)) {
-		case 0:
-			background = getResources().getDrawable(R.drawable.card_background_blue);
-			break;
-		case 1:
-			background = getResources().getDrawable(R.drawable.card_background_purple);
-			break;
-		case 2:
-			background = getResources().getDrawable(R.drawable.card_background_green);
-			break;
-		case 3:
-			background = getResources().getDrawable(R.drawable.card_background_orange);
-			break;
-		case 4:
-			background = getResources().getDrawable(R.drawable.card_background_red);
-			break;
-		}
-
-		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
-		a.recycle();
-	}
 
 	@SuppressWarnings("deprecation")
 	public DayCard(Context context, int day, String score, boolean editMode) {
@@ -61,7 +28,7 @@ public class DayCard extends LinearLayout implements OnClickListener {
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.card, this, true);
-		
+
 		String[] days = context.getResources().getStringArray(R.array.days);
 		((TextView) findViewById(R.id.tvDay)).setText(days[day]);
 		tvScore = (TextView) findViewById(R.id.tvScore);
@@ -85,9 +52,8 @@ public class DayCard extends LinearLayout implements OnClickListener {
 			background = getResources().getDrawable(R.drawable.card_background_red);
 			break;
 		}
-
 		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
-		
+
 		// Prepare edit buttons
 		if (editMode) {
 			ImageButton current;
@@ -104,7 +70,7 @@ public class DayCard extends LinearLayout implements OnClickListener {
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 		}
-		
+
 		pic1 = (ImageView) findViewById(R.id.ivC1);
 		pic2 = (ImageView) findViewById(R.id.ivC2);
 	}
@@ -127,14 +93,14 @@ public class DayCard extends LinearLayout implements OnClickListener {
 		}
 		tvScore.setText(db.getResultForDay(day));
 	}
-	
+
 	public int[] getSize() {
 		int[] size = new int[2];
 		size[0] = pic1.getDrawable().getIntrinsicWidth();
 		size[1] = pic1.getDrawable().getIntrinsicHeight();
 		return size;
 	}
-	
+
 	public void setProfiles(Bitmap p1, Bitmap p2) {
 		if (p1 != null) {
 			pic1.setImageBitmap(p1);

@@ -34,7 +34,7 @@ public class Bitmapper {
 
 	public static Bitmap decodeSampledBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
 		Bitmap b = null;
-		
+
 		try {
 			final BitmapFactory.Options options = new BitmapFactory.Options();
 			options.inJustDecodeBounds = true;
@@ -47,15 +47,14 @@ public class Bitmapper {
 
 			// Decode bitmap with inSampleSize set
 			options.inJustDecodeBounds = false;
-			
+
 			stream = context.getContentResolver().openInputStream(uri);
 			b = BitmapFactory.decodeStream(stream, null, options);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return b;

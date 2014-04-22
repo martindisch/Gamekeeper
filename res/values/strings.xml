@@ -20,5 +20,6 @@
     <string name="no">No</string>
     <string name="pic_updated">Picture updated</string>
     <string name="all_reset">All data deleted</string>
+    <string name="edit">Edit</string>
 
 </resources>
