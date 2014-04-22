@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="language_entries">
+        <item>English</item>
+        <item>German</item>
+    </array>
+
+    <string-array name="days">
+        <item>Mo</item>
+        <item>Tu</item>
+        <item>We</item>
+        <item>Th</item>
+        <item>Fr</item>
+    </string-array>
+    <array name="locales">
+        <item>en</item>
+        <item>de</item>
+    </array>
+
+</resources>

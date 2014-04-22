@@ -7,12 +7,12 @@
     <string name="image_descript">The image of one of the participants in the game</string>
     <string name="ib_descript_plus">Increase this player\'s points</string>
     <string name="ib_descript_minus">Decrease this player\'s points</string>
-    <string-array name="days">
-        <item>Mo</item>
-        <item>Tu</item>
-        <item>We</item>
-        <item>Th</item>
-        <item>Fr</item>
-    </string-array>
+    <string name="preference_players">Players</string>
+    <string name="preference_p1_pic">Player 1 picture</string>
+    <string name="preference_p2_pic">Player 2 picture</string>
+    <string name="preference_misc">Miscellaneous</string>
+    <string name="language_select_title">Select language</string>
+    <string name="preference_language">Change language</string>
+    <string name="preference_reset">Clear data</string>
 
 </resources>

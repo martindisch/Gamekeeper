@@ -33,6 +33,7 @@ public class DbManager {
 	public void resetAll() {
 		editor.clear();
 		editor.commit();
+		callUpdate();
 	}
 	
 	private void callUpdate() {
