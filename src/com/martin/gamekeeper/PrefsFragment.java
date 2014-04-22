@@ -1,5 +1,7 @@
 package com.martin.gamekeeper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -33,8 +35,19 @@ public class PrefsFragment extends PreferenceFragment {
 			
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				DbManager db = new DbManager(getActivity());
-				db.resetAll();
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setMessage(R.string.reset_message);
+				builder.setTitle(R.string.reset_title);
+				builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						DbManager db = new DbManager(getActivity());
+						db.resetAll();
+					}
+				});
+				builder.setNegativeButton(R.string.no, null);
+				builder.show();
 				return true;
 			}
 		});

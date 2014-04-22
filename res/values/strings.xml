@@ -14,5 +14,9 @@
     <string name="language_select_title">Select language</string>
     <string name="preference_language">Change language</string>
     <string name="preference_reset">Clear data</string>
+    <string name="reset_message">Do you want to reset all stats?</string>
+    <string name="reset_title">Reset</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

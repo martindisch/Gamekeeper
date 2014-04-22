@@ -15,7 +15,8 @@
             android:entries="@array/language_entries"
             android:entryValues="@array/locales"
             android:key="language"
-            android:title="@string/preference_language" />
+            android:title="@string/preference_language"
+            android:defaultValue="en" />
 
         <Preference
             android:key="reset"

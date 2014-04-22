@@ -1,7 +1,9 @@
 package com.martin.gamekeeper;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -13,7 +15,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+		displayDays();
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
 		displayDays();
 	}
 
@@ -42,7 +50,9 @@ public class MainActivity extends Activity {
 			displayDays();
 			break;
 		case R.id.action_settings:
-
+			Intent i = new Intent(MainActivity.this, PrefsActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
 			break;
 		case R.id.action_about:
 
