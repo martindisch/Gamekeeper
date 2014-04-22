@@ -1,27 +1,18 @@
 package com.martin.gamekeeper;
 
-import java.io.InputStream;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 public class DbManager {
 
 	private SharedPreferences sp;
 	private SharedPreferences.Editor editor;
-	private Bitmap bitmap;
-	private Context context;
-	private boolean available;
 
 	@SuppressLint("CommitPrefEdits")
 	public DbManager(Context context) {
 		super();
-		this.context = context;
-		available = false;
 		sp = context.getSharedPreferences("Gamedata", Context.MODE_PRIVATE);
 		editor = sp.edit();
 	}
@@ -52,33 +43,8 @@ public class DbManager {
 		callUpdate();
 	}
 
-	public boolean picAvailable(int player) {
-		available = false;
-		try {
-			Uri imageUri = Uri.parse(sp.getString(player + "pic", "null"));
-			
-			// Potentially critical when other threads are trying to access the bitmap
-			if (bitmap != null) {
-				bitmap.recycle();
-			}
-
-			InputStream stream = context.getContentResolver().openInputStream(imageUri);
-			
-			BitmapFactory.Options options=new BitmapFactory.Options();
-			options.inSampleSize = 10;
-			
-			bitmap = BitmapFactory.decodeStream(stream,null,options);
-
-			stream.close();
-			available = true;
-		} catch (Exception e) {
-			available = false;
-		}
-		return available;
-	}
-
-	public Bitmap getProfilePic(int player) {
-		return bitmap;
+	public Uri getPicUri(int player) {
+			return Uri.parse(sp.getString(player + "pic", "null"));
 	}
 
 	private void callUpdate() {

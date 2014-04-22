@@ -1,6 +1,7 @@
 package com.martin.gamekeeper;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
@@ -30,27 +31,34 @@ public class Bitmapper {
 
 		return inSampleSize;
 	}
-	
-	public static Bitmap decodeSampledBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
-		
-		final BitmapFactory.Options options = new BitmapFactory.Options();
-	    options.inJustDecodeBounds = true;
 
-	    InputStream stream = null;
+	public static Bitmap decodeSampledBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
+		Bitmap b = null;
+		
 		try {
+			final BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			InputStream stream = context.getContentResolver().openInputStream(uri);
+			BitmapFactory.decodeStream(stream, null, options);
+			stream.close();
+
+			// Calculate inSampleSize
+			options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+			// Decode bitmap with inSampleSize set
+			options.inJustDecodeBounds = false;
+			
 			stream = context.getContentResolver().openInputStream(uri);
+			b = BitmapFactory.decodeStream(stream, null, options);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-	    BitmapFactory.decodeStream(stream, null, options);
-
-	    // Calculate inSampleSize
-	    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-	    // Decode bitmap with inSampleSize set
-	    options.inJustDecodeBounds = false;
-	    return BitmapFactory.decodeStream(stream, null, options);
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
 	}
 
 }

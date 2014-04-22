@@ -1,5 +1,6 @@
 package com.martin.gamekeeper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
 
 public class PrefsFragment extends PreferenceFragment {
 
@@ -51,6 +53,7 @@ public class PrefsFragment extends PreferenceFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						db.resetAll();
+						Toast.makeText(getActivity(), R.string.all_reset, Toast.LENGTH_SHORT).show();
 					}
 				});
 				builder.setNegativeButton(R.string.no, null);
@@ -61,13 +64,11 @@ public class PrefsFragment extends PreferenceFragment {
 
 	}
 
+	@SuppressLint("InlinedApi")
 	private void getPic(int i) {
+		Intent intent = new Intent();
 		player = i;
-		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-		intent.addCategory(Intent.CATEGORY_OPENABLE);
-		intent.setType("image/*");
-		startActivityForResult(intent, 1);
-		/*if (Build.VERSION.SDK_INT < 19) {
+		if (Build.VERSION.SDK_INT < 19) {
 			intent = new Intent();
 			intent.setAction(Intent.ACTION_GET_CONTENT);
 			intent.setType("image/*");
@@ -77,7 +78,7 @@ public class PrefsFragment extends PreferenceFragment {
 			intent.addCategory(Intent.CATEGORY_OPENABLE);
 			intent.setType("image/*");
 			startActivityForResult(intent, 1);
-		}*/
+		}
 	}
 
 	@Override
@@ -86,6 +87,7 @@ public class PrefsFragment extends PreferenceFragment {
 		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 			db.setProfilePic(player, data.getData());
 		}
+		Toast.makeText(getActivity(), R.string.pic_updated, Toast.LENGTH_SHORT).show();
 	}
 
 }

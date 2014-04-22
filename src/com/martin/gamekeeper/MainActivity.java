@@ -2,6 +2,8 @@ package com.martin.gamekeeper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -16,12 +18,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-		displayDays();
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
 		displayDays();
 	}
 
@@ -33,6 +34,29 @@ public class MainActivity extends Activity {
 
 		for (int i = 0; i < 5; i++) {
 			root.addView(new DayCard(this, i, db.getResultForDay(i), editMode));
+		}
+
+		// Get Uri's and check if available
+		Uri p1Uri = db.getPicUri(1);
+		Uri p2Uri = db.getPicUri(2);
+		
+		int[] size = ((DayCard) root.getChildAt(0)).getSize();
+		int width = size[0];
+		int height = size[1];
+		
+		Bitmap pic1 = null, pic2 = null;
+
+		if (!p1Uri.toString().contentEquals("null")) {
+			pic1 = Bitmapper.decodeSampledBitmap(this, p1Uri, width, height);
+		}
+		if (!p2Uri.toString().contentEquals("null")) {
+			pic2 = Bitmapper.decodeSampledBitmap(this, p2Uri, width, height);
+		}
+		
+		if (pic1 != null || pic2 != null) {
+			for (int i = 0; i < 5; i++) {
+				((DayCard) root.getChildAt(i)).setProfiles(pic1, pic2);
+			}
 		}
 	}
 

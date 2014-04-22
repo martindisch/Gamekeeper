@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,6 +61,7 @@ public class DayCard extends LinearLayout implements OnClickListener {
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.card, this, true);
+		
 		String[] days = context.getResources().getStringArray(R.array.days);
 		((TextView) findViewById(R.id.tvDay)).setText(days[day]);
 		tvScore = (TextView) findViewById(R.id.tvScore);
@@ -88,28 +88,6 @@ public class DayCard extends LinearLayout implements OnClickListener {
 
 		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
 		
-		pic1 = (ImageView) findViewById(R.id.ivC1);
-		pic2 = (ImageView) findViewById(R.id.ivC2);
-		Thread t = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				Bitmap b1 = null, b2 = null;
-				if (db.picAvailable(1)) {
-					b1 = db.getProfilePic(1);
-					pic1.setImageBitmap(b1);
-				}
-				if (db.picAvailable(2)) {
-					b2 = db.getProfilePic(2);
-					pic2.setImageBitmap(b2);
-				}
-	
-			}
-		});
-		t.start();
-		
-		
-
 		// Prepare edit buttons
 		if (editMode) {
 			ImageButton current;
@@ -126,6 +104,9 @@ public class DayCard extends LinearLayout implements OnClickListener {
 			current.setVisibility(VISIBLE);
 			current.setOnClickListener(this);
 		}
+		
+		pic1 = (ImageView) findViewById(R.id.ivC1);
+		pic2 = (ImageView) findViewById(R.id.ivC2);
 	}
 
 	@Override
@@ -145,6 +126,22 @@ public class DayCard extends LinearLayout implements OnClickListener {
 			break;
 		}
 		tvScore.setText(db.getResultForDay(day));
+	}
+	
+	public int[] getSize() {
+		int[] size = new int[2];
+		size[0] = pic1.getDrawable().getIntrinsicWidth();
+		size[1] = pic1.getDrawable().getIntrinsicHeight();
+		return size;
+	}
+	
+	public void setProfiles(Bitmap p1, Bitmap p2) {
+		if (p1 != null) {
+			pic1.setImageBitmap(p1);
+		}
+		if (p2 != null) {
+			pic2.setImageBitmap(p2);
+		}
 	}
 
 }
