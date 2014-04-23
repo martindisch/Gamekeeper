@@ -44,7 +44,6 @@ public class DbManager {
 
 	public void setProfilePic(int player, Uri uri) {
 		editor.putString(player + "pic", uri.toString());
-		editor.putBoolean(player + "updated", false);
 		editor.commit();
 		callUpdate();
 	}
