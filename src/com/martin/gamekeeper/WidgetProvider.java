@@ -27,26 +27,7 @@ public class WidgetProvider extends AppWidgetProvider {
 			// Get the views for the widget
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 			
-			// Background
-			Drawable background = null;
-			switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
-			case 0:
-				background = context.getResources().getDrawable(R.drawable.card_background_blue);
-				break;
-			case 1:
-				background = context.getResources().getDrawable(R.drawable.card_background_purple);
-				break;
-			case 2:
-				background = context.getResources().getDrawable(R.drawable.card_background_green);
-				break;
-			case 3:
-				background = context.getResources().getDrawable(R.drawable.card_background_orange);
-				break;
-			case 4:
-				background = context.getResources().getDrawable(R.drawable.card_background_red);
-				break;
-			}
-			//remoteViews.setInt(R.id.container, "setBackgroundResource", color);
+			views.setInt(R.id.llCardRoot, "setBackgroundResource", Util.getBackground(Util.getDay()));
 			
 			// Set up
 			// set the intent for the click-event
@@ -54,9 +35,9 @@ public class WidgetProvider extends AppWidgetProvider {
 			views.setOnClickPendingIntent(R.id.llCardKontingent, penKontIntent);
 			views.setOnClickPendingIntent(R.id.llCardKISS, penKissIntent);
 			views.setOnClickPendingIntent(R.id.ibNotenAdd, penacNotIntent);
-			views.setOnClickPendingIntent(R.id.ibKontAdd, penacKontIntent);
+			views.setOnClickPendingIntent(R.id.ibKontAdd, penacKontIntent);*/
 
-			appWidgetManager.updateAppWidget(appWidgetIds[y], views);*/
+			appWidgetManager.updateAppWidget(appWidgetIds[y], views);
 		}
 	}
 	
