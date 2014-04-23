@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,25 +34,7 @@ public class DayCard extends LinearLayout implements OnClickListener {
 		tvScore = (TextView) findViewById(R.id.tvScore);
 		tvScore.setText(score);
 
-		Drawable background = null;
-		switch (day) {
-		case 0:
-			background = getResources().getDrawable(R.drawable.card_background_blue);
-			break;
-		case 1:
-			background = getResources().getDrawable(R.drawable.card_background_purple);
-			break;
-		case 2:
-			background = getResources().getDrawable(R.drawable.card_background_green);
-			break;
-		case 3:
-			background = getResources().getDrawable(R.drawable.card_background_orange);
-			break;
-		case 4:
-			background = getResources().getDrawable(R.drawable.card_background_red);
-			break;
-		}
-		findViewById(R.id.llCardRoot).setBackgroundDrawable(background);
+		findViewById(R.id.llCardRoot).setBackgroundDrawable(getResources().getDrawable(Util.getBackground(day)));
 
 		// Prepare edit buttons
 		if (editMode) {
