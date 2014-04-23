@@ -18,6 +18,8 @@ public class WidgetProvider extends AppWidgetProvider {
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
+		
+		DbManager db = new DbManager(context);
 
 		final int wcount = appWidgetIds.length;
 
@@ -27,7 +29,14 @@ public class WidgetProvider extends AppWidgetProvider {
 			// Get the views for the widget
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 			
+			// Background
 			views.setInt(R.id.llCardRoot, "setBackgroundResource", Util.getBackground(Util.getDay()));
+			
+			// Day
+			views.setTextViewText(R.id.tvDay, context.getResources().getStringArray((R.array.days))[Util.getDay()]);
+			
+			// Score
+			views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
 			
 			// Set up
 			// set the intent for the click-event
