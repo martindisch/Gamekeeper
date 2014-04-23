@@ -7,36 +7,41 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
 
+	private static final String C1Inc = "C1_Score";
+	private static final String C2Inc = "C2_Score";
+	private DbManager db;
+	private int[] appWidgetIds;
+
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		
-		DbManager db = new DbManager(context);
+
+		db = new DbManager(context);
+		this.appWidgetIds = appWidgetIds;
 
 		final int wcount = appWidgetIds.length;
 
 		// Iterate through all instances of the widget
 		for (int y = 0; y < wcount; y++) {
-			
+
 			// Get the views for the widget
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-			
+
 			// Background
 			views.setInt(R.id.llCardRoot, "setBackgroundResource", Util.getBackground(Util.getDay()));
-			
+
 			// Day
 			views.setTextViewText(R.id.tvDay, context.getResources().getStringArray((R.array.days))[Util.getDay()]);
-			
+
 			// Score
 			views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
-			
+
 			// Profile pictures
-			
+
 			// Get Uri's
 			Uri p1Uri = db.getPicUri(1);
 			Uri p2Uri = db.getPicUri(2);
@@ -59,39 +64,44 @@ public class WidgetProvider extends AppWidgetProvider {
 				if (pic2 != null) {
 					views.setImageViewBitmap(R.id.ivC2, pic2);
 				}
-			}			
-			
+			}
+
 			// set the intent for the click-event
-			/*views.setOnClickPendingIntent(R.id.llCardNoten, penNotIntent);
-			views.setOnClickPendingIntent(R.id.llCardKontingent, penKontIntent);
-			views.setOnClickPendingIntent(R.id.llCardKISS, penKissIntent);
-			views.setOnClickPendingIntent(R.id.ibNotenAdd, penacNotIntent);
-			views.setOnClickPendingIntent(R.id.ibKontAdd, penacKontIntent);*/
+			views.setOnClickPendingIntent(R.id.ivC1, getPendingSelfIntent(context, C1Inc));
+			views.setOnClickPendingIntent(R.id.ivC2, getPendingSelfIntent(context, C2Inc));
 
 			appWidgetManager.updateAppWidget(appWidgetIds[y], views);
 		}
 	}
-	
+
 	@Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
+	public void onReceive(Context context, Intent intent) {
+		super.onReceive(context, intent);
 
-        /*if (SYNC_CLICKED.equals(intent.getAction())) {
+		if (C1Inc.equals(intent.getAction()) || C2Inc.equals(intent.getAction())) {
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			final int wcount = appWidgetIds.length;
 
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			// Iterate through all instances of the widget
+			for (int y = 0; y < wcount; y++) {
 
-            RemoteViews remoteViews;
-            ComponentName watchWidget;
+				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
-            remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            watchWidget = new ComponentName(context, Widget.class);
+				int player = 0;
+				if (C1Inc.equals(intent.getAction())) {
+					player = 1;
+				}
+				if (C2Inc.equals(intent.getAction())) {
+					player = 2;
+				}
+				db.setScoreForDay(player, Util.getDay(), db.getScoreForDay(player, Util.getDay()));
 
-            remoteViews.setTextViewText(R.id.sync_button, "TESTING");
+				views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
 
-            appWidgetManager.updateAppWidget(watchWidget, remoteViews);
-
-        }*/
-    }
+				appWidgetManager.updateAppWidget(appWidgetIds[y], views);
+			}
+		}
+	}
 
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
 		Intent intent = new Intent(context, getClass());
