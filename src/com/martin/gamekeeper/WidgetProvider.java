@@ -87,6 +87,9 @@ public class WidgetProvider extends AppWidgetProvider {
 			int prev = db.getScoreForDay(player, Util.getDay());
 			prev++;
 			db.setScoreForDay(player, Util.getDay(), prev);
+			
+			Countdown countdown = new Countdown(context, 120000, 1000, new RemoteViews(context.getPackageName(), R.layout.widget_layout));
+            countdown.start();
 		}
 	}
 

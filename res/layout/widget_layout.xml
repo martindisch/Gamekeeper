@@ -33,20 +33,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:paddingTop="@dimen/card_padding"
+            android:textColor="@android:color/secondary_text_light"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/secondary_text_light" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="5dp"
-            android:textSize="45sp"
-            android:textStyle="bold"
+            android:text="2:00"
+            android:textSize="20sp"
             android:textColor="@android:color/secondary_text_light" />
     </RelativeLayout>
 
