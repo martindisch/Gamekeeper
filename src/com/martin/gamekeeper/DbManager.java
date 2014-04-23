@@ -46,6 +46,19 @@ public class DbManager {
 	public Uri getPicUri(int player) {
 		return Uri.parse(sp.getString(player + "pic", "null"));
 	}
+	
+	public void saveSize(int[] size) {
+		editor.putInt("x", size[0]);
+		editor.putInt("y", size[1]);
+		editor.commit();
+	}
+	
+	public int[] getSavedSize() {
+		int size[] = new int[2];
+		size[0] = sp.getInt("x", 0);
+		size[1] = sp.getInt("y", 0);
+		return size;
+	}
 
 	private void callUpdate() {
 

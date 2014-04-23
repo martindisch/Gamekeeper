@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 
 		// Get size of imageviews
 		int[] size = ((DayCard) root.getChildAt(0)).getSize();
+		db.saveSize(size);
 		int width = size[0];
 		int height = size[1];
 

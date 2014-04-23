@@ -1,16 +1,13 @@
 package com.martin.gamekeeper;
 
-import java.util.Calendar;
-import java.util.List;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
@@ -38,7 +35,32 @@ public class WidgetProvider extends AppWidgetProvider {
 			// Score
 			views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
 			
-			// Set up
+			// Profile pictures
+			
+			// Get Uri's
+			Uri p1Uri = db.getPicUri(1);
+			Uri p2Uri = db.getPicUri(2);
+			// Get size of imageviews
+			int[] size = db.getSavedSize();
+			int width = size[0];
+			int height = size[1];
+			// If we know a size, do it
+			if (width != 0 && height != 0) {
+				Bitmap pic1 = null, pic2 = null;
+				if (!p1Uri.toString().contentEquals("null")) {
+					pic1 = Bitmapper.decodeSampledBitmap(context, p1Uri, width, height);
+				}
+				if (!p2Uri.toString().contentEquals("null")) {
+					pic2 = Bitmapper.decodeSampledBitmap(context, p2Uri, width, height);
+				}
+				if (pic1 != null) {
+					views.setImageViewBitmap(R.id.ivC1, pic1);
+				}
+				if (pic2 != null) {
+					views.setImageViewBitmap(R.id.ivC2, pic2);
+				}
+			}			
+			
 			// set the intent for the click-event
 			/*views.setOnClickPendingIntent(R.id.llCardNoten, penNotIntent);
 			views.setOnClickPendingIntent(R.id.llCardKontingent, penKontIntent);
@@ -52,7 +74,6 @@ public class WidgetProvider extends AppWidgetProvider {
 	
 	@Override
     public void onReceive(Context context, Intent intent) {
-        // TODO Auto-generated method stub
         super.onReceive(context, intent);
 
         /*if (SYNC_CLICKED.equals(intent.getAction())) {
