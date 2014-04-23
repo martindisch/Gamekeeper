@@ -3,26 +3,24 @@ package com.martin.gamekeeper;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
 
 	private static final String C1Inc = "C1_Score";
 	private static final String C2Inc = "C2_Score";
-	private DbManager db;
-	private int[] appWidgetIds;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-		db = new DbManager(context);
-		this.appWidgetIds = appWidgetIds;
-
+		DbManager db = new DbManager(context);
 		final int wcount = appWidgetIds.length;
 
 		// Iterate through all instances of the widget
@@ -79,7 +77,27 @@ public class WidgetProvider extends AppWidgetProvider {
 		super.onReceive(context, intent);
 
 		if (C1Inc.equals(intent.getAction()) || C2Inc.equals(intent.getAction())) {
+			DbManager db = new DbManager(context);
+
+			int player = 0;
+			if (C1Inc.equals(intent.getAction())) {
+				player = 1;
+			}
+			if (C2Inc.equals(intent.getAction())) {
+				player = 2;
+			}
+			int prev = db.getScoreForDay(player, Util.getDay());
+			prev++;
+			db.setScoreForDay(player, Util.getDay(), prev);
+			Log.e("FFF", "Clicked");
+		}
+		
+		Log.e("FFF", "Received");
+
+		/*if (C1Inc.equals(intent.getAction()) || C2Inc.equals(intent.getAction())) {
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			ComponentName thisAppWidget = new ComponentName(context.getPackageName(), WidgetProvider.class.getName());
+			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 			final int wcount = appWidgetIds.length;
 
 			// Iterate through all instances of the widget
@@ -100,7 +118,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
 				appWidgetManager.updateAppWidget(appWidgetIds[y], views);
 			}
-		}
+		}*/
 	}
 
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
