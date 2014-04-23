@@ -21,5 +21,6 @@
     <string name="pic_updated">Picture updated</string>
     <string name="all_reset">All data deleted</string>
     <string name="edit">Edit</string>
+    <string name="two_minutes">2:00</string>
 
 </resources>
