@@ -66,7 +66,7 @@ public class DbManager {
 		return size;
 	}
 
-	private void callUpdate() {
+	public void callUpdate() {
 		Intent rIntent = new Intent(context, WidgetProvider.class);
 		rIntent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
 		int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, WidgetProvider.class));

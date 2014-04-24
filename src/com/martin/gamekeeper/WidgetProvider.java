@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
@@ -34,6 +35,11 @@ public class WidgetProvider extends AppWidgetProvider {
 
 		// Score
 		views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
+		
+		// Timer
+		if (!Util.counting()) {
+			views.setTextViewText(R.id.tvTimer, context.getResources().getString(R.string.two_minutes));
+		}
 
 		// Profile pictures
 		// Only load images if necessary
@@ -78,10 +84,11 @@ public class WidgetProvider extends AppWidgetProvider {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
-
+		
 		if (C1Inc.equals(intent.getAction()) || C2Inc.equals(intent.getAction())) {
 			// Only allow interaction when not counting already
 			if (!Util.counting()) {
+				
 				DbManager db = new DbManager(context);
 
 				int player = 0;
@@ -105,6 +112,8 @@ public class WidgetProvider extends AppWidgetProvider {
 				v.vibrate(pattern, -1);
 			}
 		}
+		
+		//db.callUpdate();
 	}
 
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {

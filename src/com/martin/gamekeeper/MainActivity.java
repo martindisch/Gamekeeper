@@ -61,6 +61,8 @@ public class MainActivity extends Activity {
 				((DayCard) root.getChildAt(i)).setProfiles(pic1, pic2);
 			}
 		}
+		
+		db.callUpdate();
 	}
 
 	@Override
