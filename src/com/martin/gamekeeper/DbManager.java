@@ -37,8 +37,12 @@ public class DbManager {
 	}
 
 	public void resetAll() {
+		int[] size = getSavedSize();
 		editor.clear();
+		editor.putInt("x", size[0]);
+		editor.putInt("y", size[1]);
 		editor.commit();
+		Util.picsChanged();
 		callUpdate();
 	}
 

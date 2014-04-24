@@ -41,9 +41,11 @@ public class WidgetProvider extends AppWidgetProvider {
 			views.setTextViewText(R.id.tvTimer, context.getResources().getString(R.string.two_minutes));
 		}
 
+		Log.e("FFF", "Updating the stuff");
 		// Profile pictures
 		// Only load images if necessary
 		if (Util.picsChangedSinceLastCheck()) {
+			Log.e("FFF", "Pics have been changed");
 			// Get Uri's
 			Uri p1Uri = db.getPicUri(1);
 			Uri p2Uri = db.getPicUri(2);
@@ -53,6 +55,7 @@ public class WidgetProvider extends AppWidgetProvider {
 			int height = size[1];
 			// If we know a size, do it
 			if (width != 0 && height != 0) {
+				Log.e("FFF", "Size is known");
 				Bitmap pic1 = null, pic2 = null;
 				if (!p1Uri.toString().contentEquals("null")) {
 					pic1 = Bitmapper.decodeSampledBitmap(context, p1Uri, width, height);
@@ -63,8 +66,14 @@ public class WidgetProvider extends AppWidgetProvider {
 				if (pic1 != null) {
 					views.setImageViewBitmap(R.id.ivC1, pic1);
 				}
+				else {
+					views.setImageViewResource(R.id.ivC1, R.drawable.unknown);
+				}
 				if (pic2 != null) {
 					views.setImageViewBitmap(R.id.ivC2, pic2);
+				}
+				else {
+					views.setImageViewResource(R.id.ivC2, R.drawable.unknown);
 				}
 			}
 			// set the intent for the click-event
