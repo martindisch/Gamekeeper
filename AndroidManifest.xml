@@ -38,6 +38,18 @@
         <activity
             android:name="com.martin.gamekeeper.PrefsActivity"
             android:label="@string/action_settings" />
+        <activity 
+            android:name="com.martin.gamekeeper.AboutActivity"
+            android:label="@string/action_about"/>
+        <activity
+            android:name="com.martin.gamekeeper.License"
+            android:label="@string/license" >
+            <intent-filter>
+                <action android:name="com.martin.gamekeeper.LICENSE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

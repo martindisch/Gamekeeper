@@ -84,7 +84,9 @@ public class MainActivity extends Activity {
 			startActivity(i);
 			break;
 		case R.id.action_about:
-
+			Intent y = new Intent(MainActivity.this, AboutActivity.class);
+			y.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(y);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
