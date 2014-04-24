@@ -17,16 +17,16 @@ public class Countdown extends CountDownTimer {
 		super(millisInFuture, countDownInterval);
 		this.views = views;
 		mContext = context;
-		thisWidget = new ComponentName(context, WidgetProvider.class );
+		thisWidget = new ComponentName(context, WidgetProvider.class);
 		manager = AppWidgetManager.getInstance(context);
 	}
 
 	@Override
 	public void onFinish() {
 		Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-		long[] pattern = {0, 100, 100, 100, 100, 200, 100, 100, 100, 100, 100, 200};
+		long[] pattern = { 0, 100, 100, 100, 100, 200, 100, 100, 100, 100, 100, 200 };
 		v.vibrate(pattern, -1);
-		
+
 		views.setTextViewText(R.id.tvTimer, "2:00");
 		manager.partiallyUpdateAppWidget(manager.getAppWidgetIds(thisWidget), views);
 		Util.stopCounting();
@@ -38,8 +38,7 @@ public class Countdown extends CountDownTimer {
 		int seconds = (int) (millisUntilFinished / 1000) - (minutes * 60);
 		if (seconds < 10) {
 			views.setTextViewText(R.id.tvTimer, minutes + ":0" + seconds);
-		}
-		else {
+		} else {
 			views.setTextViewText(R.id.tvTimer, minutes + ":" + seconds);
 		}
 		manager.partiallyUpdateAppWidget(manager.getAppWidgetIds(thisWidget), views);

@@ -34,7 +34,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
 		// Score
 		views.setTextViewText(R.id.tvScore, db.getResultForDay(Util.getDay()));
-		
+
 		// Timer
 		if (!Util.counting()) {
 			views.setTextViewText(R.id.tvTimer, context.getResources().getString(R.string.two_minutes));
@@ -61,14 +61,12 @@ public class WidgetProvider extends AppWidgetProvider {
 				}
 				if (pic1 != null) {
 					views.setImageViewBitmap(R.id.ivC1, pic1);
-				}
-				else {
+				} else {
 					views.setImageViewResource(R.id.ivC1, R.drawable.unknown);
 				}
 				if (pic2 != null) {
 					views.setImageViewBitmap(R.id.ivC2, pic2);
-				}
-				else {
+				} else {
 					views.setImageViewResource(R.id.ivC2, R.drawable.unknown);
 				}
 			}
@@ -89,11 +87,11 @@ public class WidgetProvider extends AppWidgetProvider {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
-		
+
 		if (C1Inc.equals(intent.getAction()) || C2Inc.equals(intent.getAction())) {
 			// Only allow interaction when not counting already
 			if (!Util.counting()) {
-				
+
 				DbManager db = new DbManager(context);
 
 				int player = 0;
@@ -110,14 +108,13 @@ public class WidgetProvider extends AppWidgetProvider {
 				Countdown countdown = new Countdown(context, 120000, 1000, new RemoteViews(context.getPackageName(), R.layout.widget_layout));
 				countdown.start();
 				Util.startCounting();
-			}
-			else {
+			} else {
 				Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-				long[] pattern = {0, 100};
+				long[] pattern = { 0, 100 };
 				v.vibrate(pattern, -1);
 			}
 		}
-		
+
 		//db.callUpdate();
 	}
 

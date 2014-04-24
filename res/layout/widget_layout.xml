@@ -53,8 +53,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="@string/two_minutes"
-            android:textSize="20sp"
-            android:textColor="@android:color/secondary_text_light" />
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <RelativeLayout

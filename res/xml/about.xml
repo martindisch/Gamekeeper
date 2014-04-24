@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <Preference
-        android:title="by Martin Disch" >
+    <Preference android:title="by Martin Disch" >
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://plus.google.com/109229883001874099057/posts" />
@@ -15,6 +14,5 @@
     <Preference android:title="@string/license" >
         <intent android:action="com.martin.gamekeeper.LICENSE" />
     </Preference>
-
 
 </PreferenceScreen>
