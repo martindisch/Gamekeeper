@@ -5,6 +5,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -21,18 +22,20 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-		Locale locale = new Locale(sp.getString("language", "en"));
+		Editor editor = sp.edit();
+		Locale locale = new Locale(sp.getString("language", getResources().getConfiguration().locale.getLanguage()));
 		Locale.setDefault(locale);
 		Configuration config = new Configuration();
 		config.locale = locale;
 		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+		editor.putString("language", locale.getLanguage());
+		editor.commit();
 		displayDays();
 	}
 
