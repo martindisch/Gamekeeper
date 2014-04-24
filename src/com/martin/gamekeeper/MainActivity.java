@@ -1,7 +1,11 @@
 package com.martin.gamekeeper;
 
+import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +27,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		Locale locale = new Locale(sp.getString("language", "en"));
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.locale = locale;
+		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		displayDays();
 	}
 
@@ -31,7 +41,7 @@ public class MainActivity extends Activity {
 
 		LinearLayout root = (LinearLayout) findViewById(R.id.container);
 		DbManager db = new DbManager(this);
-		
+
 		for (int i = 0; i < 5; i++) {
 			root.addView(new DayCard(this, i, db.getResultForDay(i), editMode));
 		}
@@ -61,14 +71,15 @@ public class MainActivity extends Activity {
 				((DayCard) root.getChildAt(i)).setProfiles(pic1, pic2);
 			}
 		}
-		
+
 		db.callUpdate();
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.clear();
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override

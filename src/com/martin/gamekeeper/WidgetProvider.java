@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Vibrator;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
@@ -41,11 +40,9 @@ public class WidgetProvider extends AppWidgetProvider {
 			views.setTextViewText(R.id.tvTimer, context.getResources().getString(R.string.two_minutes));
 		}
 
-		Log.e("FFF", "Updating the stuff");
 		// Profile pictures
 		// Only load images if necessary
 		if (Util.picsChangedSinceLastCheck()) {
-			Log.e("FFF", "Pics have been changed");
 			// Get Uri's
 			Uri p1Uri = db.getPicUri(1);
 			Uri p2Uri = db.getPicUri(2);
@@ -55,7 +52,6 @@ public class WidgetProvider extends AppWidgetProvider {
 			int height = size[1];
 			// If we know a size, do it
 			if (width != 0 && height != 0) {
-				Log.e("FFF", "Size is known");
 				Bitmap pic1 = null, pic2 = null;
 				if (!p1Uri.toString().contentEquals("null")) {
 					pic1 = Bitmapper.decodeSampledBitmap(context, p1Uri, width, height);
