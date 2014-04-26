@@ -11,7 +11,11 @@ public class Util {
 			R.drawable.card_background_red };
 
 	public static int getDay() {
-		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
+		int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
+		if (day > 4) {
+			day = 0;
+		}
+		return day;
 	}
 
 	public static int getBackground(int day) {
