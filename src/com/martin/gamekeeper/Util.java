@@ -12,7 +12,7 @@ public class Util {
 
 	public static int getDay() {
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
-		if (day > 4) {
+		if (day > 4 || day < 0) {
 			day = 0;
 		}
 		return day;
