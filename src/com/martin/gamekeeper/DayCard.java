@@ -35,6 +35,8 @@ public class DayCard extends LinearLayout implements OnClickListener {
 		tvScore.setText(score);
 
 		findViewById(R.id.llCardRoot).setBackgroundDrawable(getResources().getDrawable(Util.getBackground(day)));
+		findViewById(R.id.ivC1).setOnClickListener(this);
+		findViewById(R.id.ivC2).setOnClickListener(this);
 
 		// Prepare edit buttons
 		if (editMode) {
@@ -75,6 +77,12 @@ public class DayCard extends LinearLayout implements OnClickListener {
 			break;
 		case R.id.ibP2Dec:
 			db.setScoreForDay(2, day, db.getScoreForDay(2, day) - 1);
+			break;
+		case R.id.ivC1:
+			db.setScoreForDay(1, day, db.getScoreForDay(1, day) + 1);
+			break;
+		case R.id.ivC2:
+			db.setScoreForDay(2, day, db.getScoreForDay(2, day) + 1);
 			break;
 		}
 		tvScore.setText(db.getResultForDay(day));
